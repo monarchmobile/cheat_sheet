@@ -1,0 +1,42 @@
+1) <!-- add this to gem file -->
+gem 'client_side_validations'
+
+2) <!-- command line -->
+rails g client_side_validations:install
+	<!-- installs 
+	create  config/initializers/client_side_validations.rb
+    create  public/javascripts/rails.validations.js -->
+
+3) <!-- We’ll modify the layout file now. All we need to do is add rails.validations to the list of included JavaScript files.
+/app/assets/javascript/application..js -->
+//= require rails.validations
+
+4) <!-- We’re also going to need to modify client_side_validations’s configuration file. By default it’s configured to use SimpleForm and Formtastic but as we aren’t using either of those we’ll need to uncomment the section at the bottom of the file and override the field_error_proc method. -->
+
+<!-- config/initializers/client_side_validations.rb -->
+# ClientSideValidations Initializer
+
+require 'client_side_validations/simple_form' if defined?(::SimpleForm)
+require 'client_side_validations/formtastic' if defined?(::Formtastic)
+
+# Uncomment the following block if you want each input field to have the validation messages attached.
+ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
+  unless html_tag =~ /^<label/
+     %{<div class="field_with_errors">#{html_tag}<label for="#{instance.send(:tag_id)}"
+  class="message">#{instance.error_message.first}</label> </div>}.html_safe
+  else
+    %{<div class="field_with_errors">#{html_tag}</div>}.html_safe
+  end
+end
+
+5) add validations option to form_for
+<%= form_for @user, :validate => true do %>
+
+<% end %>
+
+<!-- adjust scaffold.css -->
+.field_with_errors {
+  padding: 2px;
+  display: table;
+}
+

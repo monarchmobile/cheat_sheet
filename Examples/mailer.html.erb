@@ -1,0 +1,60 @@
+# How to send email using ActionMailer
+
+# 1) create a mailer 
+rails g mailer user_mailer signup_confirmation #(mailer, name_of_mailer, action)
+
+# this creates 2 files
+1) --------
+app/mailers/user_mailer.rb #use this to send out email
+
+	default from: "from@example.com"
+	def signup_confirmation(user)
+	  @user = user
+
+	  mail to: user.email, subject: "Sign Up Confirmation"
+	end
+
+2) --------
+/app/views/user_mailer/signup_confirmation.text.erb #view for message
+
+	<%= @user.name %>,  													#>
+
+	"Thank you for signing up."
+
+# send email from controller, here on user signup 
+3) ---------
+	def create
+	  @user = User.new(params[:user])
+	  if @user.save
+	    UserMailer.signup_confirmation(@user).deliver
+	    redirect_to @user, notice: "Signed up successfully."
+	  else
+	    render :new
+	  end
+	end
+
+# We can change how mail is sent by specifying the delivery_method. 
+# We can set this to smtp, sendmail, file or test.
+4) -----------
+	# go to config/environments/development.rb
+	config.action_mailer.delivery_method = :smtp
+				-or-
+	# If want to use a different server we can set the smtp_settings setting, like this:
+	# config/environments/development.rb
+
+	config.action_mailer.smtp_settings = {
+	  address: "smtp.gmail.com",
+	  port: 587,
+	  domain: "gmail.com",
+	  authentication: "plain",
+	  enable_starttls_auto: true,
+	  user_name: "GMAIL_USERNAME",
+	  password: "GMAIL_PASSWORD"
+	}
+
+# specify what domain to use for mailer URLs
+5) ------------
+	# /config/environments/development.rb
+	config.action_mailer.default_url_options - { host: "localhost:3000" }
+	# /config/environments/production.rb
+  	config.action_mailer.default_url_options = { :host => "http://election-1201-tuesday.herokuapp.com" }

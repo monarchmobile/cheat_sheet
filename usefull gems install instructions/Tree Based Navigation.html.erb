@@ -1,0 +1,8 @@
+<!-- terminal -->
+rails new cms
+cd cms
+rails g scaffold page name content:text ancestry:string:index
+rake db:migrate
+
+<!-- Gemfile -->
+gem 'ancestry'

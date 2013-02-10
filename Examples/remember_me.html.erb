@@ -1,0 +1,15 @@
+# <!-- add auth_token to users model -->
+rails g migration add_auth_token_to_users auth_token:string
+rake db:migrate
+
+User.rb
+
+# call to generate auth_token before creating user
+before_create { generate_token(:auth_token) }
+
+# method to generate an SecureRandom token for any field
+def generate_token(column)
+  begin
+    self[column] = SecureRandom.urlsafe_base64
+  end while User.exists?(column => self[column])
+end
