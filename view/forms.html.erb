@@ -1,0 +1,42 @@
+----- index -----
+checkboxes
+dates
+send() -- dynamic variables
+rows and columns spacing
+collection_select
+  from model
+  from inline
+  from lib/arrays file
+----- index ---------
+<!-- checkboxes -->
+<div class="field">
+    <%= f.label :week %><br />
+    <%= f.check_box :week %>
+</div>
+
+<!-- dates  -->
+<div class="field">
+    <%= f.label :date_taken %><br />
+    <%= f.text_field :date_taken, value: @date_taken %>
+</div>
+
+<!-- using send method to set fields dynamically -->
+<% @fields.each do |field| %>
+    <%= f.send(field.type.to_sym, field.name) %><br />
+<% end %>
+
+<!-- rows and columns -->
+<div class="field">
+	<%= f.label :content, "Journal Entry" %><br />
+	<%= f.text_area :content, :cols => 10, :rows => 10 %>
+</div>
+
+<!-- collection_select -->
+collection_select(object, method, collection, value_method, text_method, options = {}, html_options = {}) public
+  <!-- grab array from model -->
+  <%= collection_select(:user, :id, User.all, :id, :email, :prompt => "please choose a user") %>
+  (object, attribute/method for object, collection, key, value pair for dropdown)
+  <!-- create array inline -->
+  <%= f.select :duration, [["day", 1], ["week", 2], ["month", 3]] %>
+  <!-- grab array from lib/arrays file  -->
+  <%= f.select(:urgency, User::URGENCY, { prompt: true } )%>

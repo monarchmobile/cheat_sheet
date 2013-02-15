@@ -1,0 +1,73 @@
+----- index -----
+quick commands
+gets height for each image
+getter checkbox status
+setter checkbox value
+nth-child formula
+redirect to a new page
+page refresh
+grabs current page
+ajax through coffee script
+animate
+et custom data attributes
+----- index ---------
+
+// quick commands 
+  console.log(what ever you want to print out in firebug)
+   // Reload Window
+  window.setTimeout('location.reload()', 3000);
+  // setTimeout function
+  setTimeout(function() {})
+
+// gets height for each image 
+var image = []
+for(var i = 1; i <= 10; i++) {
+	image[i] = $(".img_feed_container[data-counter = '"+i+"']").height()
+} 
+
+// getter checkbox status
+$('input[name=foo]').attr('checked', true);
+$('input[name=foo]').is(':checked')
+
+// setter checkbox value
+$('input[name=foo]').attr('checked', true);
+
+// nth-child formula
+$(".flag_feed ul li:nth-child(3n+1)").addClass('first');
+
+// redirect to a new page
+window.location.href = '/some/new/page';
+
+// page refresh 
+location.reload();
+
+// grabs current page
+current_page = window.location.pathname;
+current = current_page.split("/")[4]
+
+// ajax through coffee script
+$('.add_to_your_week').change ->
+    image  = $(this).data("image")
+    user  = $(this).data("user")
+    url = "/users/"+user+"/image/"+image
+    data = {}
+    data[week] = true
+    $.ajax
+      method: "put"
+      url:    url
+      data:   data
+
+// animate: this examples pushed html up and left over during the 6 seconds
+$(".notice").html("Changes Saved!").show().animate({
+	"margin-left": "-100px",
+	"margin-top": "-100px",
+	"opacity": "0"
+}, 6000)
+
+// set custom data attributes on any element with hard-coded or in this case
+// dynamic variables
+$("#pattern_item").data({
+  price: pattern_price,
+  color: pattern_color,
+  size: pattern_size
+})
