@@ -10,6 +10,7 @@ grabs current page
 ajax through coffee script
 animate
 et custom data attributes
+loop through data attributes, set var_name var_value
 ----- index ---------
 
 // quick commands 
@@ -18,6 +19,12 @@ et custom data attributes
   window.setTimeout('location.reload()', 3000);
   // setTimeout function
   setTimeout(function() {})
+  // find out what type the var is
+  typeof var_name
+  // string to integer
+  parseInt(var_name)
+  // string to float
+  parseFloat(var_name)
 
 // gets height for each image 
 var image = []
@@ -71,3 +78,25 @@ $("#pattern_item").data({
   color: pattern_color,
   size: pattern_size
 })
+
+$.fn.get_data_attributes = function() {
+  getData = $(this).data();
+  for (var k in getData) {
+      if (getData.hasOwnProperty(k))
+      {
+         columns.push(k)
+      }
+  }
+}
+
+$.fn.set_data_attributes = function() {
+  setData = {}
+  for (i=0; i<columns.length, i++) {
+    setData[columns[i]] = getData[columns[i]]
+  }
+  $(this).data(setData)
+}
+
+  <div class="fancybox {{ variant.option2 | handleize }} product_images Pattern_choice"  data-product-handle="{{ product.handle }}" data-product-variant-id="{{variant.id}}" data-yards-needed="{{ yards_needed }}" data-product-size="{{ variant.option2 }}" data-product-price="{{ variant.price }}">
+                      <img src="{{ image | product_img_url: 'grande' }}" alt="{{ variant.option2 | escape }}" />
+                    </div>
