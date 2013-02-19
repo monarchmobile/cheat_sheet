@@ -25,6 +25,10 @@ add MAILER_HOST to application.yml
 5)
 config/routes.rb
 devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
+# push devise_for above as below:
+	devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
+	mount Piggybak::Engine => '/checkout', :as => 'piggybak'
+  	mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
 6) # optional 
 config/initializers/devise.rb

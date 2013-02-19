@@ -23,3 +23,8 @@ config:add whatever
 
 # config:add whatever
 	heroku config:add GMAIL_USERNAME=monarchmobile2@gmail.com GMAIL_PASSWORD=Butterfly787 MAILER_HOST=http://desolate-hamlet-9952.herokuapp.com 
+
+# if you have reset the head on git to rollback changes, and then push
+# heroku will fail.  You must do a force here also
+
+git push heroku master --force

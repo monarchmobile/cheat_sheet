@@ -11,6 +11,7 @@ ajax through coffee script
 animate
 et custom data attributes
 loop through data attributes, set var_name var_value
+indexOf()
 ----- index ---------
 
 // quick commands 
@@ -98,5 +99,15 @@ $.fn.set_data_attributes = function() {
 }
 
   <div class="fancybox {{ variant.option2 | handleize }} product_images Pattern_choice"  data-product-handle="{{ product.handle }}" data-product-variant-id="{{variant.id}}" data-yards-needed="{{ yards_needed }}" data-product-size="{{ variant.option2 }}" data-product-price="{{ variant.price }}">
-                      <img src="{{ image | product_img_url: 'grande' }}" alt="{{ variant.option2 | escape }}" />
-                    </div>
+    <img src="{{ image | product_img_url: 'grande' }}" alt="{{ variant.option2 | escape }}" />
+  </div>
+
+// indexOf
+
+string1 = "happy-times"
+string2 = "happytimes"
+n = string1.indexOf("-")
+n // => 5 # dash is found at index slot # 5
+x = string2.indexOf("-")
+x // => -1 #since no dash if found, value of "n" is -1
+
