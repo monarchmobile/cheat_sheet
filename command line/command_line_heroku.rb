@@ -15,6 +15,11 @@ config:add whatever
 	heroku run rake db:reset # reset database
 	heroku run rake db:migrate # rake database
 
+# view
+git remote -v (for heroku app)
+list of folders
+named_folder url_address
+
 # login
 	heroku login
 
@@ -28,3 +33,6 @@ config:add whatever
 # heroku will fail.  You must do a force here also
 
 git push heroku master --force
+
+# add heroku account to git repe
+git remote add heroku git@heroku.com:<heroku_app>.git

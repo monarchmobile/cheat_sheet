@@ -7,7 +7,7 @@ load_and_authorize_resource
 
 rescue_from CanCan::AccessDenied do |exception|
   flash[:error] = "Access denied!"
-  redirect_to root_url
+  redirect_to root_url 
 end
 
 1)
@@ -28,6 +28,7 @@ create app/models/ability.rb
 	      can :manage, :all
 	    else
 	      can :read, :all
+	    end
 	      
 	  end
 	end

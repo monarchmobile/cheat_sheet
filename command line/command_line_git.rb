@@ -20,11 +20,17 @@ add new repository (own account and monarch account)
 	git branch -d <branch_name> #(delete a branch)
 	git merge <branch_name> #(merge to master when in master)
 	
-	
+	type in command line
+	rails g migration drop_rails_admin_histories
 
 ##### go to previous commit ######
 	git reset --hard 0b86c9823dd60a01709ac16cbba0b84f258e047d
 	git push -f <remote> <branch_name>
+
+	# to rollback master changes
+	# reset to previous head
+	git push --force
+	git push heroku master --force
 
 ##### when app crashes #########
 	ps auxwww |grep ruby
@@ -47,6 +53,8 @@ add new repository (own account and monarch account)
 
 	git merge <branch_name>
 	git push
+
+
 
 
 

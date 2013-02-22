@@ -10,6 +10,24 @@ git push production master
 heroku run rake db:migrate --remote production
 heroku ps --remote production
 
+# for rod pushing from monarch git ==> heroku production
+# need to add production url to git remote
+git remote add staging git@heroku.com:quiet-thicket-3184.git 
+git remote add production git@heroku.com:infinite-thicket-3285.git 
+git remote add staging git@heroku.com:young-dusk-3425.git
+
+# remove a remote
+git remote rm staging
+
+#raking
+heroku run rake db:migrate --app quiet-thicket-3184
+heroku run rake db:migrate --app infinite-thicket-3285
+
+#drop table without migration through command line
+$ heroku console
+Ruby console for heroku-project-name
+>> ActiveRecord::Migration.drop_table(:orders)
+
 # if you wanted “staging” do be your default 
 # remote, you could set it with the following command:
 git config heroku.remote staging
