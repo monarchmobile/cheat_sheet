@@ -1,11 +1,14 @@
 # open a file
 # The -a flag specifies any application
-open -a TextEdit .bash_profile
+"open -a TextEdit .bash_profile"
+
+# refresh a file
+"source ~/.bash_profile"
 
 #create a shortcut
-ie. referral_app = cd ~/sites/referral_app
+ie. referral_app => cd ~/sites/referral_app
 
 
-1) cd
-2) open -a TextEdit .bash_profile
-3) alias referral='cd ~/sites/referral_app'
+1) "cd"
+2) "open -a TextEdit .bash_profile"
+3) "alias referral='cd ~/sites/referral_app'"
