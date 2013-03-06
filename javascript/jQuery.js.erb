@@ -12,6 +12,7 @@ animate
 et custom data attributes
 loop through data attributes, set var_name var_value
 indexOf()
+create multi-level associative array dynamically
 ----- index ---------
 
 // quick commands 
@@ -26,6 +27,10 @@ indexOf()
   parseInt(var_name)
   // string to float
   parseFloat(var_name)
+  // replace
+  replace("this", "with_that")
+  // string replace all occurnances
+  .split("this").join("with that")
 
 // gets height for each image 
 var image = []
@@ -110,4 +115,20 @@ n = string1.indexOf("-")
 n // => 5 # dash is found at index slot # 5
 x = string2.indexOf("-")
 x // => -1 #since no dash if found, value of "n" is -1
+
+// multi-level array created dynamically
+related_products = new Array()
+related_products.push(new Array(
+    "{{product.title}}", 
+    "{{product.url}}",
+    "{{product.featured_image | product_img_url: 'small'}}", 
+    "{{product.price | money}}",
+    "{{product.handle}}"))
+
+  //loop through this array
+  if (related_products.length > 0) {
+    for (i=0; i<related_products.length; i++) {
+      related_products[i][(you choose which attribute you need)]
+    }
+  }
 

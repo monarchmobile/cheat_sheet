@@ -55,7 +55,10 @@ add new repository (own account and monarch account)
 	git push
 
 
-
+# conflicts
+	git checkout origin/master file_name
+	git add file_name
+	git status
 
 
 # delete a remote branch 

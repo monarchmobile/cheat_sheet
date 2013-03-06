@@ -56,4 +56,4 @@ end
 
 # routes
 resources :parents
-resources :childs
+resources :childs (would actually be children in this example)
