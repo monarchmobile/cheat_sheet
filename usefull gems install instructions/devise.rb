@@ -38,3 +38,18 @@ config.strip_whitespace_keys = [ :username ]
 
 articles_controller.rb
 before_filter :authenticate_user!, except: [:index, :show]
+
+7)
+mkdir app/controllers/users
+touch app/controllers/users/registrations_controller.rb
+
+class Users::RegistrationsController < Devise::RegistrationsController
+  before_filter :check_permissions, :only => [:new, :create, :cancel]
+  skip_before_filter :require_no_authentication
+ 
+  def check_permissions
+    authorize! :create, resource
+  end
+end
+
+

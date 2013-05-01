@@ -1,0 +1,49 @@
+
+products have many
+variant 
+	belongs_to :item
+	has_many :option_values_variants
+
+option
+	has_many :option_values 
+	has_many :option_configurations
+
+option_value 
+	belongs_to :option
+	has_many :option_values_variants 
+
+option_values_variant
+	belongs_to :option_value	
+	belongs_to :variant
+
+option_configuration 
+	belongs_to :option	
+
+
+create_table :variants, :force => true do |t|
+      t.integer :item_id, :null => false
+      t.string :item_type, :null => false
+
+create_table :options, :force => true do |t|
+      t.string :name
+      t.integer :position
+
+create_table :option_values, :force => true do |t|
+      t.integer :option_id
+      t.string :name
+      t.integer :position
+
+create_table :option_values_variants, :id => false do |t|
+      t.integer :option_value_id
+      t.integer :variant_id
+
+create_table :option_configurations, :force => true do |t|
+      t.string :klass, :null => false
+      t.references :option, :null => false      
+
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+
+## Left Table
+class Page < ActiveRecord::Base
+  attr_accessible :content, :published, :slug, :title, :index, :link_ids
+  before_create :make_slug
+  # validates :slug, :uniqueness => true
+
+  has_many :links_pages, :dependent => :destroy
+  has_many :links, :through => :links_pages
+
+end
+
+## joining table
+class LinksPage < ActiveRecord::Base 
+	belongs_to :link
+	belongs_to :page
+
+end
+
+## Right Table
+class Link < ActiveRecord::Base
+  attr_accessible :location
+ 
+  has_many :links_pages
+  has_many :pages, :through => :links_pages
+end
+
+
+## Left controller edit actions
+def edit 
+	find_page
+	@links = Link.all
+	home_article_comment_form
+end
+
+
+## form
+<div class="field">
+  	<%= f.label :links %><br />
+    <% @links.each do |link| %>
+      <%= check_box_tag "page[link_ids][]", link.id, @page.links.include?(link) %>  
+      <%= link.location %>  
+    <% end %>
+</div>
+
+

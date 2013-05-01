@@ -16,6 +16,7 @@ git remote add staging git@heroku.com:quiet-thicket-3184.git
 git remote add production git@heroku.com:infinite-thicket-3285.git 
 git remote add staging git@heroku.com:young-dusk-3425.git
 
+
 # remove a remote
 git remote rm staging
 
@@ -38,8 +39,20 @@ heroku config:add RACK_ENV=staging RAILS_ENV=staging --remote staging
 heroku config:add S3_KEY=XXX --remote staging
 heroku config:add S3_SECRET=YYY --remote staging
 
+# git merge when force to merge with messagex
+git merge styling -m "this is my commit"
+
 
 # create staging from production
 
 heroku addons
 heroku create --remote staging --addons newrelic:standard,loggly:mole,...
+
+
+# git staging branch to staging heroku
+git push staging staging:master
+
+staging:master => <branch>:master
+
+
+

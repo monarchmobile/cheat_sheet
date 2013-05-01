@@ -6,6 +6,7 @@ image_tag
 render partials
 rendering collections
 lorem ipsum
+flash
 ----- index ---------
 
 <!-- Link_to -->
@@ -67,3 +68,17 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
  
  -also-
  	lorem (tab) will prepopulate
+
+ def show_flash
+	[:notice, :error, :warning].collect do |key|
+	  content_tag(:div, flash[key], :id => key, :class => "flash flash_#{key}") unless flash[key].blank?
+	end.join
+end
+
+def flash_message
+    html = ""
+    flash.each do |key, msg|
+      html << (content_tag :div, msg, :id => key, :class => 'flash')
+    end
+    html
+end
