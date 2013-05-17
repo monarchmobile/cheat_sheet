@@ -1,8 +1,20 @@
+# from Rod's computer
+heroku login
+login to monarch heroku account
+
 # create a staging app in heroku
 heroku create --remote staging
 git push staging master
 heroku run rake db:migrate --remote staging
 heroku ps --remote staging
+
+# add tables to heroku app
+move devise migration to beggining
+heroku run rake db:migrate --remote staging
+heroku run start:build_all
+
+Create Roles
+Add Users to Supermodels
 
 # create a production app in heroku
 heroku create --remote production
@@ -11,7 +23,9 @@ heroku run rake db:migrate --remote production
 heroku ps --remote production
 
 # for rod pushing from monarch git ==> heroku production
+	# for when site was set up by someone else on heroku.This allows me to pipe in
 # need to add production url to git remote
+git remote add staging git@heroku.com:infinite-tundra-1954.git
 git remote add staging git@heroku.com:quiet-thicket-3184.git 
 git remote add production git@heroku.com:infinite-thicket-3285.git 
 git remote add staging git@heroku.com:young-dusk-3425.git

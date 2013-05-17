@@ -1,0 +1,17 @@
+<!-- html -->
+<%= form_for user, :html => {:class => 'user_ajax_edit'}, :url => { :controller => "users", :action => :update, id: user.id }, remote: true do |a| %>		
+	<%= a.hidden_field :approved, :value => user.approved, :id => "user_approved_#{user.id}" %>
+	<%= content_tag :div, user_approved_status(user), class: "user_approval_status index_form_btns #{green_if_approved(user)}" %>
+<% end %>
+
+<!-- js.coffee -->
+$("body").delegate ".user_ajax_edit .user_approval_status", "click", ->
+		id = $(this).prev().attr("id")
+		if $("#"+id) is "true"
+			$("#"+id).val(false)
+			$(this).html("Not Approved").removeClass("green_background").addClass("red_background")
+			$(this).closest("form").submit -> return
+		else if $("#"+id).val() is "false"
+			$("#"+id).prev().val(true)
+			$(this).html("Approved").addClass("green_background").removeClass("red_background")
+			$(this).prev().closest("form").submit -> return

@@ -38,9 +38,12 @@ heroku run rake db:seed
 heroku run rake db:setup
 
 # wipe database clean
-heroku pg:reset --app infinite-thicket-3285 DATABASE_URL
+heroku pg:reset --app infinite-tundra-1954 DATABASE_URL
 
 # reset table
 ActiveRecord::Base.connection.reset_pk_sequence!('table_name')
+
+# drop table
+ActiveRecord::Migration.drop_table(:users)
 
 

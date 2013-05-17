@@ -57,10 +57,10 @@ end
 # common data definition tasks
 add_column :my_table, :column_name, :type
 add_index
-change_column
+change_column :table_name, :column_name, :date
 change_table
 create_table
-drop_table
+drop_table :table_name
 remove_column :table_name, :column_name
 remove_index
 rename_column :users, :name, :username

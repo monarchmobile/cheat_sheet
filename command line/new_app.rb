@@ -17,6 +17,7 @@ rails new new_app_name -d postgresql
 rails new test1 --database=postgresql -m ~/sites/startup_template/monarchTemplate.rb
 
 # clone from git
+git clone git@github.com:monarchmobile/church.git church
 git clone (ssh git address) new_app_folder_name_on_local_computer
 cd new_app
 
@@ -24,6 +25,7 @@ bundle install
 rake db:migrate
 
 # add new repository
+git remote add origin git@github-monarch:monarchmobile/church.git
 git remote add origin git@github-monarch:monarchmobile/new_repo.git (rod to monarch)
 git remote add origin git@github:rodmanhe/new_repo.git (rod to rod)
 git remote add origin git@github:monarchmobile/new_repo.git (andrew to monarch)
@@ -37,10 +39,20 @@ development:
 create config/application.yml
 	# checkout cheat_sheet/config/application.yml
 
+# allow gmail access for mailer
+	https://accounts.google.com/DisplayUnlockCaptcha
+	config.mailer_sender = "monarchmobile2@gmail.com" # add this on line 7 to intializers/devise.rb
+# change gmail password on heroku app
+heroku config:add GMAIL_PASSWORD=lkasjdflkm 
+
+# unset config key
+heroku config:unset SECRET_KEY --remote staging
+
 # no heroku app yet
 if no heroku app
 	heroku create
 	git push heroku master
+
 
 	heroku config:add GMAILER_USERNAME=monarchmobile2@gmail.com GMAIL_PASSWORD=aslkdhf SECRET_TOKEN=.... and so on, (MAILER_HOST, and AWS creditials if needed)
 
